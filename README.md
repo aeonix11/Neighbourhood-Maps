@@ -19,4 +19,4 @@ can see all the locations.
 
 ## How to start the project
 ------------------------
-Simply unzip then zipfile and open the index file with your browser.
+Simply click the link  https://aeonix11.github.io/Neighbourhood-Maps/.
