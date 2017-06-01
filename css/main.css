@@ -1,0 +1,138 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+      /*Assassin font :)*/
+@font-face {
+    font-family: assassin;
+        src: url(fonts/Assassin$.ttf);
+}
+
+.container-fluid {
+    height: 100%;
+    position: relative;
+    font-family: assassin;
+}
+
+hr {
+    background: #D0D7D9;
+    height: 1px;
+    margin: 20px 0 20px 0;
+    border: none;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.map {
+    height: 100%;
+}
+
+.google-maps-loading {
+    color: green;
+}
+
+.options-box {
+    background: #fff;
+    height: 100%;
+    line-height: 35px;
+    padding: 10px 10px 0px 10px;
+}
+
+.pano {
+    width: 300px;
+    height: 300px;
+}
+
+.fsqData {
+    width: 300px;
+}
+
+.search {
+    width: 84%;
+}
+
+@media(max-width: 410px) {
+    h1 {
+        font-size: 18pt;
+    }
+
+    .pano {
+        width: 130px;
+    }
+
+    .fsqData {
+        width: 130px;
+    };
+}
+
+@media(max-width: 550px) {
+    .pano {
+        width: 180px;
+    }
+
+    .fsqData {
+        width: 180px;
+    };
+}
+
+.places-list {
+    line-height: 1;
+    border: 1px solid grey;
+}
+
+.places-list li:hover {
+    background-color: #4d6059;
+    color: white;
+}
+
+.places-list h5 {
+    background-color: #24282b;
+    color: white;
+}
+
+.places-list ul {
+    background-color: #7f8d89;
+    max-height: 400px;
+    margin: 0;
+    overflow: auto;
+    list-style-type: none;
+    padding-left: 1px;
+}
+
+.places-list a {
+    color: white;
+}
+
+@media(max-width: 360px), (max-height: 642px) {
+    .places-list ul {
+        max-height: 280px;
+    };
+}
+
+@media(max-width: 360px), (max-height: 588px) {
+    .places-list ul {
+        max-height: 160px;
+    }
+
+    h1 {
+        font-size: 12pt;
+    };
+}
+
+@media(max-width: 360px), (max-height: 431px) {
+    .places-list ul {
+        max-height: 90px;
+    }
+
+    h1 {
+        font-size: 12pt;
+    };
+}
+
+.error {
+    color: red;
+}
