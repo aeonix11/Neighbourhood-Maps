@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 function init() {
   // Checks if google loaded, if it hasnt it throws an alert box error.
@@ -9,7 +9,7 @@ function init() {
     document.body.innerHTML = '<h1 class="error">Google has failed to load 😞,' +
                               ' try checking your internet connection!</h1>';
   }
-};
+}
 
 // Setting globals.
 var locations = ko.observableArray([
@@ -424,7 +424,7 @@ function initMarkers() {
     addMarkerWithAnimations(locations()[i],i * 100, i);
 
   }
-};
+}
 
 function addMarkerWithAnimations(marker, timeout, i) {
   // Set marker with a timeout that delays the drop animation for each marker.
@@ -448,7 +448,7 @@ function addMarkerWithAnimations(marker, timeout, i) {
   screenMapSize();
 
   }, timeout);
-};
+}
 
 // Adds marker mouse over event to change icon image.
 function iconImage(i){
@@ -462,7 +462,7 @@ function iconImage(i){
     this.setIcon(defaultIcon);
   });
 
-};
+}
 
 // Sets marker icon
 function makeMarkerIcon(image) {
@@ -474,7 +474,7 @@ function makeMarkerIcon(image) {
     imageSet = highlightedIcon;
   } else {
     imageSet = defaultIcon;
-  };
+  }
 
   var markerImage = new google.maps.MarkerImage(
     imageSet,
@@ -498,7 +498,7 @@ function bounceIcon(i){
       }, 750);
     }
   }
-};
+}
 
 function addMarkerInfoWindows(i) {
 
@@ -564,10 +564,10 @@ function googleStreetViewContent(i) {
       console.error("Street View data not found for this location.");
       document.body.innerHTML = '<h1 class="error">Google streetview is having problems 😞,' +
                               ' try checking your internet connection!</h1>';
-      alert("Street View data not found for this location.")
-    };
-  };
-};
+      alert("Street View data not found for this location.");
+    }
+  }
+}
 
 
 function getFsquare(i) {
@@ -584,8 +584,8 @@ function getFsquare(i) {
     .done(function(response){
       fsqInfo = "<p>Foursquare info:<br>";
       var venue = response.response.venues[0];
-      /* console.log(venue);
-      console.log("venue name =" + venue.name + "<br>venu ID = "
+       console.log(response);
+      /*console.log("venue name =" + venue.name + "<br>venu ID = "
        + venue.id + "<br>venu address = " + venue.location.formattedAddress +
        " veneu website " + venue.url + "venu tips" + venue.stats.tipCount);*/
       var venueID = venue.id;
@@ -609,8 +609,10 @@ function getFsquare(i) {
           fsqInfo = fsqInfo + "Address: " +
               address + "<br>";
       }
+      // canonicalUrl
+      fsqInfo = fsqInfo + "Link to Foursquare site: " +
+              "<a href ='https://foursquare.com/venue/" + venueID + "'>Foursquare Site</a><br>";
       // Url
-      var venueUrl = venue.url;
       if (venue.url !== null && venue.url !== undefined){
           fsqInfo = fsqInfo + "website: " +
               venue.url + "<br>";
@@ -626,7 +628,7 @@ function getFsquare(i) {
           infowindow.open(map, markers[i]);
 
       } else {
-         fsqInfo = fsqInfo + "<br><hr>There are no tips to display.<hr>"
+         fsqInfo = fsqInfo + "<br><hr>There are no tips to display.<hr>";
          document.getElementById("fsqData").innerHTML = fsqInfo;
         // Reopen to auto adjust info window size to all content.
          infowindow.open(map, markers[i]);
@@ -637,8 +639,8 @@ function getFsquare(i) {
       document.body.innerHTML = '<h1 class="error">Foursquare is having problems 😞,' +
                               ' try checking your internet connection!</h1>';
       alert("Fouresquare request failed to load, try checking your internet connection.");
-    })
-};
+    });
+}
 
 function getFsqTips(venueID, tipCount, i){
 
@@ -653,36 +655,36 @@ function getFsqTips(venueID, tipCount, i){
       for(var d=0;d<tipCount;d++){
           fsqInfo = fsqInfo + "<li>" +
               response.response.tips.items[d].text + "</li>";
-      };
+      }
 
       fsqInfo = fsqInfo + "</ul></p>";
       document.getElementById("fsqData").innerHTML = fsqInfo;
       // Reopen to auto adjust info window size to all content.
-      infowindow.open(map, markers[i])
+      infowindow.open(map, markers[i]);
     })
     .fail(function(){
       document.body.innerHTML = '<h1 class="error">Foursquare is having problems 😞,' +
                               ' try checking your internet connection!</h1>';
       alert("Fouresquare tips failed to load.");
-    })
-};
+    });
+}
 
 
 function screenMapSize(){
 if ($(window).height() < 730) {
      map.setZoom(16);
-  };
+  }
   if ($(window).width() < 930) {
      map.setZoom(16);
-  };
-};
+  }
+}
 $(window).resize(function() {
   if ($(window).height() < 730) {
      map.setZoom(16);
-  };
+  }
   if ($(window).width() < 930) {
      map.setZoom(16);
-  };
+  }
 });
 
 var viewModel = {
@@ -705,7 +707,7 @@ function search() {
   // By setting "setMap" to null you remove all markers from the map.
   for(var e=0;e<markers.length;e++){
     markers[e].setMap(null);
-  };
+  }
   /* Set search results markers "setMap" function to "map" and the markers in the search
    appear on the map */
   for(var i=0;i<searchResults().length;i++){
@@ -714,7 +716,7 @@ function search() {
      then use markers array to set the "setMap" function */
     markers[temp].setMap(map);
     // Sets the center of the map according to search results
-    if(viewModel.query() == ""){
+    if(viewModel.query() === ""){
       infowindow.close();
       map.setCenter({lat: -34.1172625, lng: 18.827619});
       /* I was not sure if this function would lose me points so I left it in comments
@@ -724,9 +726,9 @@ function search() {
      /*} else {
        map.setCenter(markers[temp].getPosition());
      };*/
-    };
-  };
-};
+    }
+  }
+}
 
 ko.applyBindings(viewModel);
 
