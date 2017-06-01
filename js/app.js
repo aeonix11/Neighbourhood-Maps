@@ -609,13 +609,13 @@ function getFsquare(i) {
           fsqInfo = fsqInfo + "Address: " +
               address + "<br>";
       }
-      // canonicalUrl
+      // CanonicalUrl
       fsqInfo = fsqInfo + "Link to Foursquare site: " +
               "<a href ='https://foursquare.com/venue/" + venueID + "'>Foursquare Site</a><br>";
       // Url
       if (venue.url !== null && venue.url !== undefined){
-          fsqInfo = fsqInfo + "website: " +
-              venue.url + "<br>";
+          fsqInfo = fsqInfo + "website: <a href='" +
+              venue.url + "'>" + venue.url + "</a><br>";
       } else {
         fsqInfo = fsqInfo + "Website: No website.";
       }
