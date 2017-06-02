@@ -1,16 +1,10 @@
 "use strict";
-
-function init() {
-  // Checks if google loaded, if it hasnt it throws an alert box error.
-  if (typeof google !== 'undefined') {
-    console.log("Google loaded successfully 😀, hopefully nothing else breaks.");
-    initialize();
-  }else {
-    document.body.innerHTML = '<h1 class="error">Google has failed to load 😞,' +
+// If google fails to load show an error message
+function googleFail() {
+  document.body.innerHTML = '<h1 class="error">Google has failed to load 😞,' +
                               ' try checking your internet connection!</h1>';
-  }
 }
-
+// window.onload = init();
 // Setting globals.
 var locations = ko.observableArray([
         {title: "Post Office", location: {lat: -34.1165049, lng: 18.830113},
@@ -524,14 +518,13 @@ function addMarkerInfoWindows(i) {
 // Open an infoWindo when list item is clicked.
 function openInfoM(c, event){
 // Retrieve the id of the element that fired the event.
-  var element = event.target;
-  var click_id = element.id;
+  var id = c.id;
 
   if(infowindow)infowindow.close();
-    infowindow.open(map, markers[click_id]);
-     googleStreetViewContent(click_id);
-     getFsquare(click_id);
-     map.setCenter(markers[click_id].getPosition());
+    infowindow.open(map, markers[id]);
+     googleStreetViewContent(id);
+     getFsquare(id);
+     map.setCenter(markers[id].getPosition());
 }
 
 // Google Streetview
@@ -584,7 +577,6 @@ function getFsquare(i) {
     .done(function(response){
       fsqInfo = "<p>Foursquare info:<br>";
       var venue = response.response.venues[0];
-       console.log(response);
       /*console.log("venue name =" + venue.name + "<br>venu ID = "
        + venue.id + "<br>venu address = " + venue.location.formattedAddress +
        " veneu website " + venue.url + "venu tips" + venue.stats.tipCount);*/
@@ -731,7 +723,3 @@ function search() {
 }
 
 ko.applyBindings(viewModel);
-
-
-
-
