@@ -26,7 +26,7 @@
         <h1>Explore some of Strands places</h1>
         <div>
           <span class="text">Search for nearby places</span>
-          <input id="search" class="search" type="text" placeholder="Ex: Spur, KFC" data-bind="textInput: query" data-bind="click: search" >
+          <input id="search" class="search" type="text" placeholder="Ex: Spur, KFC" data-bind="textInput: query, event: { keyup: search }" >
           <input id="search-go" type="button" value="Go">
           <div class="places-list">
               <ul data-bind="template: {name: 'marker', foreach: searchResults}">
@@ -54,6 +54,6 @@
   </div>
   <script src="js/knockout-3.4.2.js"></script>
   <script src="js/app.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGWWM8XpmTz07aK791CVPd7bqKDDJ3H_I&callback=init" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGWWM8XpmTz07aK791CVPd7bqKDDJ3H_I&callback=initialize" async defer onerror="googleFail()" ></script>
 </body>
 </html>
