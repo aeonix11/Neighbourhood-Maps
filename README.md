@@ -20,3 +20,5 @@ can see all the locations.
 ## How to start the project
 ------------------------
 Simply click the link  https://aeonix11.github.io/Neighbourhood-Maps/.
+
+If you have downloaded the files then open the index.html file with your browser.
