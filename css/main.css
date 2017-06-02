@@ -7,7 +7,7 @@ body {
       /*Assassin font :)*/
 @font-face {
     font-family: assassin;
-        src: url(fonts/Assassin$.ttf);
+        src: url(../fonts/Assassin$.ttf);
 }
 
 .container-fluid {
@@ -49,6 +49,7 @@ hr {
 
 .fsqData {
     width: 300px;
+    font-family: assassin;
 }
 
 .search {
