@@ -26,12 +26,13 @@
         <h1>Explore some of Strands places</h1>
         <div>
           <span class="text">Search for nearby places</span>
-          <input id="search" class="search" type="text" placeholder="Ex: Spur, KFC" data-bind="textInput: query, event: { keyup: search }" >
+          <input id="search" class="search" type="text" placeholder="Ex: Spur, KFC" data-bind="textInput: query, event: { keyup: search, click: openInfoM }" >
           <input id="search-go" type="button" value="Go">
           <div class="places-list">
               <ul data-bind="template: {name: 'marker', foreach: searchResults}">
               </ul>
               <script type="text/html" id="marker">
+                <div data-bind="event: {mouseover: iconImageOver, mouseout: iconImageOut }">
                   <li data-bind="attr: {id: id}, click: openInfoM">
                     <a href="#" data-bind="attr: {id: id}">
                       <h5 data-bind="text: title, attr: {id: id}"></h5>
@@ -39,6 +40,7 @@
                       <hr>
                     </a>
                   </li>
+                </div>
               </script>
           </div>
         </div>
