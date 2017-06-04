@@ -494,6 +494,17 @@ function bounceIcon(i){
   }
 }
 
+function bounceIcon2(i){
+  if (markers[i].getAnimation() !== null) {
+    markers[i].setAnimation(null);
+  } else {
+    markers[i].setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function(){ markers[i].setAnimation(null);
+    }, 750);
+  }
+}
+
+
 function addMarkerInfoWindows(i) {
 
   infowindow = new google.maps.InfoWindow({
@@ -503,9 +514,9 @@ function addMarkerInfoWindows(i) {
   // On click opens infowindow and executes getstreetView and Fsquare data
   markers[i].addListener("click", function() {
     if(infowindow)infowindow.close();
+    getFsquare(i);
     infowindow.open(map, markers[i]);
-     googleStreetViewContent(i);
-     getFsquare(i);
+    
   });
   // Make sure the marker property is cleared if the infowindow is closed.
   infowindow.addListener("closeclick",function(){
@@ -521,10 +532,30 @@ function openInfoM(c, event){
   var id = c.id;
 
   if(infowindow)infowindow.close();
-    infowindow.open(map, markers[id]);
-     googleStreetViewContent(id);
-     getFsquare(id);
-     map.setCenter(markers[id].getPosition());
+  bounceIcon2(id);
+  iconImage(id);
+  infowindow.open(map, markers[id]);
+  getFsquare(id);
+  map.setCenter(markers[id].getPosition());
+}
+
+// The list mouseover and mouse out icon change functions
+function iconImageOver(c, event){
+  var id = c.id;
+
+  var highlightedIcon = makeMarkerIcon("highlightedIcon");
+  var defaultIcon = makeMarkerIcon("defaultIcon");
+
+  markers[id].setIcon(highlightedIcon);
+}
+
+function iconImageOut(c, event){
+  var id = c.id;
+  
+  var highlightedIcon = makeMarkerIcon("highlightedIcon");
+  var defaultIcon = makeMarkerIcon("defaultIcon");
+
+  markers[id].setIcon(defaultIcon);
 }
 
 // Google Streetview
@@ -575,7 +606,7 @@ function getFsquare(i) {
   // Gets foursquare data and adds it to fsqInfo variable that gets inserted into the infowindow
   $.getJSON(url)
     .done(function(response){
-      fsqInfo = "<p>Foursquare info:<br>";
+      fsqInfo = "<div id='fsqData' class='fsqData'><p>Foursquare info:<br>";
       var venue = response.response.venues[0];
       /*console.log("venue name =" + venue.name + "<br>venu ID = "
        + venue.id + "<br>venu address = " + venue.location.formattedAddress +
@@ -615,15 +646,17 @@ function getFsquare(i) {
       var tipCount = venue.stats.tipCount;
       if (tipCount > 0) {
           getFsqTips(venueID, tipCount, i);
-          document.getElementById("fsqData").innerHTML = fsqInfo;
-          // Reopen to auto adjust info window size to all content.
-          infowindow.open(map, markers[i]);
+          
 
       } else {
-         fsqInfo = fsqInfo + "<br><hr>There are no tips to display.<hr>";
-         document.getElementById("fsqData").innerHTML = fsqInfo;
-        // Reopen to auto adjust info window size to all content.
-         infowindow.open(map, markers[i]);
+         fsqInfo = fsqInfo + "<br><hr>There are no tips to display.<hr></div><div id='pano' class='pano'>Google streetview is loading.</div>";
+          infowindow.setContent(fsqInfo);
+          // Google streetview content gets loaded after setContent
+          googleStreetViewContent(i);
+          // Reopen to auto adjust info window size to all content.
+          infowindow.open(map, markers[i]);
+        
+        
       }
     })
     .fail(function(){
@@ -649,10 +682,13 @@ function getFsqTips(venueID, tipCount, i){
               response.response.tips.items[d].text + "</li>";
       }
 
-      fsqInfo = fsqInfo + "</ul></p>";
-      document.getElementById("fsqData").innerHTML = fsqInfo;
-      // Reopen to auto adjust info window size to all content.
-      infowindow.open(map, markers[i]);
+      fsqInfo = fsqInfo + "</ul></p><div id='pano' class='pano'>Google streetview is loading.</div>";
+        infowindow.setContent(fsqInfo);
+        //Google streetview content gets loaded after setContent
+        googleStreetViewContent(i);
+        // Reopen to auto adjust info window size to all content.
+        infowindow.open(map, markers[i]);
+       
     })
     .fail(function(){
       document.body.innerHTML = '<h1 class="error">Foursquare is having problems 😞,' +
